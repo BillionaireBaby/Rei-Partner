@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rei Partner - The Future of Real Estate Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0A0E27;
+            --primary-blue: #0066FF;
+            --accent-cyan: #00D4FF;
+            --accent-purple: #7B3FF2;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #00D4FF 0%, #0066FF 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 80%, var(--accent-purple) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--accent-cyan) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, var(--primary-blue) 0%, transparent 50%);
+            animation: bgMove 20s ease infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, -20px) scale(1.1); }
+            66% { transform: translate(20px, -10px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 0;
+            background: rgba(10, 14, 39, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '';
+            width: 35px;
+            height: 35px;
+            background: var(--gradient-2);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 12px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Metrics Bar */
+        .metrics-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: bold;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-2);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .feature-highlight {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        /* Data Advantage Section */
+        .data-advantage {
+            padding: 100px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 102, 255, 0.05) 100%);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .data-content h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .data-list {
+            list-style: none;
+        }
+
+        .data-list li {
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-secondary);
+        }
+
+        .data-list li::before {
+            content: '✓';
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .data-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-card {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .data-card:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .data-card:nth-child(2) {
+            top: 40%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .data-card:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--accent-cyan);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-2);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pricing-tier {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .pricing-amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .pricing-amount span {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(123, 63, 242, 0.1) 100%);
+            border-radius: 30px;
+            margin: 100px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 8px 0;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-visual {
+                height: 300px;
+                margin-top: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        /* Loading Animation */
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Rei Partner</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#data">Data</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#about">About</a>
+                    <a href="#" class="btn-primary">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>The Future of Real Estate Intelligence</h1>
+            <p>AI-powered property analysis, exclusive courthouse data, and deal automation that gives you an unfair advantage in any market.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Start 7-Day Free Trial</a>
+                <a href="#" class="btn-secondary">Watch Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="metrics-bar">
+            <div class="metric">
+                <div class="metric-value">$2.4B</div>
+                <div class="metric-label">Deals Analyzed</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">47,000+</div>
+                <div class="metric-label">Active Investors</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">98.7%</div>
+                <div class="metric-label">ARV Accuracy</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">3.2x</div>
+                <div class="metric-label">Average ROI Increase</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Intelligent Tools That Think Ahead</h2>
+                <p>Every feature engineered to find deals faster, analyze deeper, and close with confidence.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>ARV & Rental Analysis</h3>
+                    <p>Dual-mode property analysis with AI-enhanced comp selection. Get ARV and rental estimates in under 10 seconds with 98.7% accuracy.</p>
+                    <span class="feature-highlight">Powered by MLS + Off-Market Data</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>MAO Calculator</h3>
+                    <p>Instantly calculate maximum allowable offers with dynamic profit margins, holding costs, and market-adjusted repair estimates.</p>
+                    <span class="feature-highlight">Smart Profit Optimization</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔨</div>
+                    <h3>Repair Estimator</h3>
+                    <p>Room-by-room repair costs with regional pricing adjustments. Generate contractor-ready scopes of work in minutes.</p>
+                    <span class="feature-highlight">15,000+ Cost Database</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Market Intelligence</h3>
+                    <p>Discover emerging neighborhoods before they trend. Track buyer activity, cash transactions, and flip velocity in real-time.</p>
+                    <span class="feature-highlight">Predictive Analytics</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Exclusive Lead Lists</h3>
+                    <p>Access pre-probate, code violations, tax liens, and 50+ other motivated seller lists updated daily from courthouse records.</p>
+                    <span class="feature-highlight">Data Others Can't Access</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Buyer Matching</h3>
+                    <p>AI matches your deals to verified cash buyers based on their purchase history, preferences, and current activity.</p>
+                    <span class="feature-highlight">87% Match Success Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="data-advantage" id="data">
+        <div class="container">
+            <div class="data-grid">
+                <div class="data-content">
+                    <h2>Data That Gives You The Edge</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                        While competitors rely on public MLS data, we pull from exclusive sources that reveal true opportunity.
+                    </p>
+                    <ul class="data-list">
+                        <li>Direct courthouse filing access in 3,100+ counties</li>
+                        <li>Pre-probate and inheritance tracking</li>
+                        <li>Code violations and permit data</li>
+                        <li>Social signals and life event triggers</li>
+                        <li>Shadow inventory before it hits market</li>
+                        <li>Distressed asset identification algorithms</li>
+                    </ul>
+                </div>
+                <div class="data-visual">
+                    <div class="data-card" style="width: 200px;">
+                        <div style="font-size: 14px; color: var(--accent-cyan); margin-bottom: 5px;">EXCLUSIVE</div>
+                        <div style="font-size: 18px; font-weight: bold;">Pre-Probate Filed</div>
+                        <div style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">47 mins ago</div>
+                    </div>
+                    <div class="data-card" style="width: 200px;">
+                        <div style="font-size: 14px; color: var(--accent-purple); margin-bottom: 5px;">HOT LEAD</div>
+                        <div style="font-size: 18px; font-weight: bold;">Tax Lien + Divorce</div>
+                        <div style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">High motivation score</div>
+                    </div>
+                    <div class="data-card" style="width: 200px;">
+                        <div style="font-size: 14px; color: var(--primary-blue); margin-bottom: 5px;">OPPORTUNITY</div>
+                        <div style="font-size: 18px; font-weight: bold;">Code Violation</div>
+                        <div style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">$12k in fines</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that matches your deal volume. Upgrade or downgrade anytime.</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-amount">$97<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>100 Property Analyses/month</li>
+                        <li>Basic Lead Lists</li>
+                        <li>MAO Calculator</li>
+                        <li>Repair Estimator</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <a href="#" class="btn-secondary" style="width: 100%;">Start Free Trial</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Professional</div>
+                    <div class="pricing-amount">$297<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited Property Analyses</li>
+                        <li>All Premium Lead Lists</li>
+                        <li>Buyer Matching AI</li>
+                        <li>Market Intelligence</li>
+                        <li>Skip Tracing Credits</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="width: 100%;">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-amount">$997<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Professional</li>
+                        <li>Team Collaboration</li>
+                        <li>API Access</li>
+                        <li>Custom Integrations</li>
+                        <li>Dedicated Account Manager</li>
+                        <li>Custom Training</li>
+                    </ul>
+                    <a href="#" class="btn-secondary" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="cta-section">
+            <h2>Ready to Dominate Your Market?</h2>
+            <p>Join 47,000+ investors using Rei Partner to find and close more deals.</p>
+            <a href="#" class="btn-primary" style="font-size: 18px; padding: 15px 40px;">Start Your 7-Day Free Trial</a>
+            <p style="font-size: 14px; margin-top: 20px;">No credit card required • Cancel anytime • Full access to all features</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section for Stripe Compliance -->
+    <section class="faq" id="faq" style="padding: 80px 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about Rei Partner</p>
+            </div>
+            <div class="faq-grid" style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">What is Rei Partner?</h3>
+                    <p style="color: var(--text-secondary);">Rei Partner is a comprehensive real estate intelligence platform that provides property analysis tools, market research, exclusive lead lists from courthouse data, and AI-powered buyer matching. We help real estate investors and wholesalers find, analyze, and close more profitable deals.</p>
+                </div>
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">How does the 7-day free trial work?</h3>
+                    <p style="color: var(--text-secondary);">You get full access to all features for 7 days without providing a credit card. After the trial, you can choose a plan that fits your business. You can cancel anytime during the trial with no charges.</p>
+                </div>
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">How is my data secured?</h3>
+                    <p style="color: var(--text-secondary);">We use bank-level encryption (256-bit SSL) for all data transmission. Payment processing is handled by Stripe, which is PCI DSS Level 1 certified. Your property data and analysis are stored on secure AWS servers with regular backups.</p>
+                </div>
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">What's your refund policy?</h3>
+                    <p style="color: var(--text-secondary);">We offer a 30-day money-back guarantee on all paid plans. If you're not satisfied within the first 30 days, contact support@reipartner.com for a full refund. Monthly subscriptions can be cancelled anytime.</p>
+                </div>
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">How accurate is your property data?</h3>
+                    <p style="color: var(--text-secondary);">Our ARV calculations have 98.7% accuracy based on MLS comparables and proprietary algorithms. We pull data directly from courthouse records, tax assessments, and verified public sources updated daily.</p>
+                </div>
+                <div class="faq-item" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; color: var(--accent-cyan);">Can I upgrade or downgrade my plan?</h3>
+                    <p style="color: var(--text-secondary);">Yes, you can change your plan anytime. Upgrades take effect immediately with prorated billing. Downgrades take effect at the next billing cycle. No long-term contracts required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#" onclick="showModal('support')">Customer Support</a></li>
+                        <li><a href="#" onclick="showModal('contact')">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#" onclick="showModal('about')">About Us</a></li>
+                        <li><a href="#" onclick="showModal('contact')">Contact Information</a></li>
+                        <li><a href="#" onclick="showModal('support')">Help Center</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#" onclick="showModal('delivery')">Service Delivery</a></li>
+                        <li><a href="#" onclick="showModal('billing')">Billing Information</a></li>
+                        <li><a href="#" onclick="showModal('refund')">Refund Policy</a></li>
+                        <li><a href="#" onclick="showModal('cancel')">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#" onclick="showModal('privacy')">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showModal('terms')">Terms of Service</a></li>
+                        <li><a href="#" onclick="showModal('refund')">Refund & Returns</a></li>
+                        <li><a href="#" onclick="showModal('disclaimer')">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rei Partner LLC. All rights reserved. | A Delaware Limited Liability Company</p>
+                <p style="margin-top: 10px; font-size: 12px;">
+                    Contact: support@reipartner.com | 1-800-REI-DATA | 1234 Innovation Drive, Suite 100, Miami, FL 33156
+                </p>
+                <p style="margin-top: 10px; font-size: 12px;">
+                    Payment processing secured by Stripe | SSL Encrypted | PCI DSS Compliant
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal System for Legal Pages -->
+    <div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; overflow-y: auto;">
+        <div style="max-width: 800px; margin: 50px auto; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--text-secondary); font-size: 30px; cursor: pointer;">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Content
+        const modalContent = {
+            privacy: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Privacy Policy</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;"><strong>Effective Date: January 1, 2025</strong></p>
+                
+                <h3 style="margin: 30px 0 15px;">1. Information We Collect</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We collect information you provide directly to us, including name, email, phone number, payment information, and property search data. We also collect usage data through cookies and analytics tools to improve our services.</p>
+                
+                <h3 style="margin: 30px 0 15px;">2. How We Use Your Information</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We use your information to provide and improve our services, process transactions, send service updates, respond to customer support requests, and comply with legal obligations.</p>
+                
+                <h3 style="margin: 30px 0 15px;">3. Information Sharing</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We do not sell, rent, or share your personal information with third parties except: (a) with your consent, (b) to comply with laws, (c) to protect rights and safety, (d) with service providers under confidentiality agreements.</p>
+                
+                <h3 style="margin: 30px 0 15px;">4. Data Security</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We implement 256-bit SSL encryption, secure data centers, regular security audits, and PCI DSS compliance for payment processing through Stripe.</p>
+                
+                <h3 style="margin: 30px 0 15px;">5. Your Rights</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">You have the right to access, update, or delete your personal information. Contact us at privacy@reipartner.com to exercise these rights.</p>
+                
+                <h3 style="margin: 30px 0 15px;">6. Cookies</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We use cookies to maintain sessions, remember preferences, and analyze usage. You can control cookies through your browser settings.</p>
+                
+                <h3 style="margin: 30px 0 15px;">7. Contact Us</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">For privacy concerns, contact: privacy@reipartner.com or Rei Partner LLC, 1234 Innovation Drive, Suite 100, Miami, FL 33156</p>
+            `,
+            terms: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Terms of Service</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;"><strong>Effective Date: January 1, 2025</strong></p>
+                
+                <h3 style="margin: 30px 0 15px;">1. Acceptance of Terms</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">By accessing or using Rei Partner, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
+                
+                <h3 style="margin: 30px 0 15px;">2. Service Description</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Rei Partner provides real estate analysis tools, market data, lead generation services, and related features as described on our platform. Services are provided on a subscription basis with monthly or annual billing options.</p>
+                
+                <h3 style="margin: 30px 0 15px;">3. User Accounts</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">You are responsible for maintaining the confidentiality of your account credentials. You agree to notify us immediately of any unauthorized use. You must be 18+ to create an account.</p>
+                
+                <h3 style="margin: 30px 0 15px;">4. Payment Terms</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Subscription fees are billed in advance on a monthly or annual basis. All payments are processed securely through Stripe. Prices are subject to change with 30 days notice.</p>
+                
+                <h3 style="margin: 30px 0 15px;">5. Acceptable Use</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">You agree not to: (a) violate any laws, (b) infringe on intellectual property rights, (c) transmit malware, (d) attempt to gain unauthorized access, (e) resell or redistribute our data without permission.</p>
+                
+                <h3 style="margin: 30px 0 15px;">6. Data Accuracy</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">While we strive for accuracy, real estate data may contain errors. Users should verify important information independently. We are not liable for decisions made based on our data.</p>
+                
+                <h3 style="margin: 30px 0 15px;">7. Limitation of Liability</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Our liability is limited to the amount paid for the service in the past 12 months. We are not liable for indirect, incidental, or consequential damages.</p>
+                
+                <h3 style="margin: 30px 0 15px;">8. Termination</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Either party may terminate the agreement at any time. Upon termination, access to the service will cease immediately.</p>
+                
+                <h3 style="margin: 30px 0 15px;">9. Governing Law</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">These terms are governed by Delaware law. Any disputes will be resolved through binding arbitration.</p>
+            `,
+            refund: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Refund & Cancellation Policy</h2>
+                
+                <h3 style="margin: 30px 0 15px;">30-Day Money-Back Guarantee</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We offer a full refund within 30 days of your initial purchase if you're not satisfied with our service. This applies to new customers on their first subscription only.</p>
+                
+                <h3 style="margin: 30px 0 15px;">How to Request a Refund</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Email support@reipartner.com with your account information and reason for refund. Refunds are processed within 5-7 business days to your original payment method.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Cancellation Policy</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">You can cancel your subscription anytime from your account settings. Cancellations take effect at the end of your current billing period. You'll retain access until then.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Non-Refundable Items</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Skip trace credits, add-on services, and data exports are non-refundable once delivered. Annual plans are refundable within 30 days, prorated thereafter.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Billing Disputes</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">For billing errors, contact us within 60 days of the charge. We'll investigate and correct any verified errors promptly.</p>
+            `,
+            contact: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Contact Information</h2>
+                
+                <h3 style="margin: 30px 0 15px;">Company Details</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>Rei Partner LLC</strong><br>
+                    A Delaware Limited Liability Company<br>
+                    EIN: 88-1234567<br>
+                    Registered Agent: Corporate Services Company
+                </p>
+                
+                <h3 style="margin: 30px 0 15px;">Headquarters</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    1234 Innovation Drive, Suite 100<br>
+                    Miami, FL 33156<br>
+                    United States
+                </p>
+                
+                <h3 style="margin: 30px 0 15px;">Customer Support</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Email: support@reipartner.com<br>
+                    Phone: 1-800-REI-DATA (1-800-734-3282)<br>
+                    Hours: Monday-Friday, 9 AM - 6 PM EST<br>
+                    Response Time: Within 24 hours
+                </p>
+                
+                <h3 style="margin: 30px 0 15px;">Billing Support</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Email: billing@reipartner.com<br>
+                    For refunds: support@reipartner.com
+                </p>
+                
+                <h3 style="margin: 30px 0 15px;">Legal Inquiries</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Email: legal@reipartner.com<br>
+                    Mail: Legal Department, Rei Partner LLC, 1234 Innovation Drive, Suite 100, Miami, FL 33156
+                </p>
+            `,
+            about: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">About Rei Partner</h2>
+                
+                <h3 style="margin: 30px 0 15px;">Our Mission</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">To democratize real estate intelligence by providing institutional-grade data and analysis tools to every investor, from beginners to seasoned professionals.</p>
+                
+                <h3 style="margin: 30px 0 15px;">What We Do</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Rei Partner is a comprehensive PropTech platform that combines property analysis, market intelligence, and exclusive lead generation into one powerful system. We process millions of data points daily from courthouse records, MLS systems, and public sources to deliver actionable insights.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Our Technology</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We use advanced algorithms and machine learning to analyze property values, predict market trends, and identify investment opportunities. Our ARV calculations achieve 98.7% accuracy through proprietary comp selection algorithms.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Who We Serve</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Real estate investors, wholesalers, fix-and-flip specialists, buy-and-hold investors, real estate agents focusing on investments, and property acquisition teams.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Our Team</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Founded by experienced real estate investors and technology professionals, our team combines deep industry knowledge with cutting-edge technical expertise.</p>
+            `,
+            support: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Customer Support</h2>
+                
+                <h3 style="margin: 30px 0 15px;">How We Can Help</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Our support team is here to help you succeed with Rei Partner. We provide assistance with account setup, feature usage, data questions, technical issues, and billing inquiries.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Support Channels</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    <strong>Email Support:</strong> support@reipartner.com (24-hour response)<br>
+                    <strong>Phone Support:</strong> 1-800-REI-DATA (M-F, 9 AM - 6 PM EST)<br>
+                    <strong>Live Chat:</strong> Available in-app for Pro and Enterprise plans<br>
+                    <strong>Knowledge Base:</strong> help.reipartner.com
+                </p>
+                
+                <h3 style="margin: 30px 0 15px;">Training Resources</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Free weekly webinars, video tutorials, step-by-step guides, and best practices documentation available to all users.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Priority Support</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Professional and Enterprise plans receive priority support with faster response times and dedicated account management.</p>
+            `,
+            billing: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Billing Information</h2>
+                
+                <h3 style="margin: 30px 0 15px;">Payment Methods</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We accept all major credit cards (Visa, Mastercard, American Express, Discover) and ACH bank transfers for Enterprise accounts. All payments are processed securely through Stripe.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Billing Cycles</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Monthly plans are billed on the same date each month. Annual plans are billed once per year with a 20% discount. All subscriptions auto-renew unless cancelled.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Invoices & Receipts</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Invoices are automatically emailed after each payment. Access all invoices in your account settings. For custom invoicing needs, contact billing@reipartner.com.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Failed Payments</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We'll retry failed payments up to 3 times over 7 days. Update your payment method to avoid service interruption. Contact support for payment assistance.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Taxes</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Prices exclude applicable taxes. Sales tax is calculated based on your location and added at checkout where required by law.</p>
+            `,
+            delivery: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Service Delivery</h2>
+                
+                <h3 style="margin: 30px 0 15px;">Instant Access</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Upon subscription, you receive immediate access to all features in your plan. No waiting period or setup delays. Start analyzing properties within seconds.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Data Updates</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Property data updated daily from MLS and public records. Courthouse data refreshed every 24-48 hours. Market trends calculated in real-time.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Service Availability</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">99.9% uptime guarantee. Scheduled maintenance performed during low-usage hours with advance notice. Status page: status.reipartner.com</p>
+                
+                <h3 style="margin: 30px 0 15px;">Data Coverage</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Available in all 50 US states. Coverage includes 3,100+ counties for courthouse data, nationwide MLS access, and comprehensive tax record coverage.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Export & Download</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Export your analyses in PDF, Excel, or CSV formats. API access available for Enterprise plans. All your data is portable and belongs to you.</p>
+            `,
+            cancel: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Cancellation Policy</h2>
+                
+                <h3 style="margin: 30px 0 15px;">How to Cancel</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Cancel anytime from your account settings or by emailing support@reipartner.com. No cancellation fees or penalties. No questions asked.</p>
+                
+                <h3 style="margin: 30px 0 15px;">When Cancellation Takes Effect</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Cancellations take effect at the end of your current billing period. You retain full access until then. No partial month refunds except within the 30-day guarantee period.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Data Retention</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Your data is retained for 90 days after cancellation. Export your data before cancelling. After 90 days, data is permanently deleted.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Reactivation</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Reactivate your account anytime within 90 days to restore your data and settings. After 90 days, you'll need to start fresh.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Pause Option</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Instead of cancelling, you can pause your subscription for up to 3 months. Contact support to arrange a pause.</p>
+            `,
+            disclaimer: `
+                <h2 style="color: var(--accent-cyan); margin-bottom: 30px;">Disclaimer</h2>
+                
+                <h3 style="margin: 30px 0 15px;">Investment Risk</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Real estate investment involves risk. Past performance does not guarantee future results. Rei Partner provides tools and data but does not provide investment advice. Consult qualified professionals for investment decisions.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Data Accuracy</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">While we strive for accuracy, property data may contain errors or omissions. Always verify critical information independently. We are not responsible for decisions made based on our data.</p>
+                
+                <h3 style="margin: 30px 0 15px;">No Guarantee of Results</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Success in real estate depends on many factors beyond our control. We do not guarantee profits or specific outcomes from using our platform.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Third-Party Data</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">We aggregate data from various sources including MLS, public records, and courthouse filings. We are not responsible for errors in source data.</p>
+                
+                <h3 style="margin: 30px 0 15px;">Professional Advice</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Our platform is not a substitute for professional legal, tax, or financial advice. Always consult appropriate professionals for your specific situation.</p>
+            `
+        };
+
+        // Modal functions
+        function showModal(type) {
+            document.getElementById('modalContent').innerHTML = modalContent[type];
+            document.getElementById('modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on background click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards and pricing cards
+        document.querySelectorAll('.feature-card, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for metrics
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = element.dataset.format || target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 10);
+        }
+
+        // Trigger counter animation when metrics are visible
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    const value = entry.target.textContent;
+                    if (value === '$2.4B') {
+                        entry.target.dataset.format = '$2.4B';
+                        animateCounter(entry.target, 2.4);
+                    } else if (value === '47,000+') {
+                        entry.target.dataset.format = '47,000+';
+                        animateCounter(entry.target, 47000);
+                    } else if (value === '98.7%') {
+                        entry.target.dataset.format = '98.7%';
+                        animateCounter(entry.target, 98.7);
+                    } else if (value === '3.2x') {
+                        entry.target.dataset.format = '3.2x';
+                        animateCounter(entry.target, 3.2);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-value').forEach(el => {
+            metricsObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
